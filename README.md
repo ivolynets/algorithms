@@ -1,2 +1,2 @@
-# algorithms
+# Algorithms
 Classic algorithms implementations
