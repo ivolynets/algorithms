@@ -17,7 +17,7 @@ func TestArrayStackExtend(t *testing.T) {
 		s.size++
 	}
 
-	// test if initial length of underlying array was not changed
+	// test if initial capacity of underlying array was not changed
 
 	testArrayStackAttributes(t, "Initial stack", s, lenExp, capExp)
 
@@ -42,8 +42,8 @@ func TestArrayStackCompact(t *testing.T) {
 
 	// init stack
 
-	lenExp := initCap + 1
-	capExp := initCap + initCap>>1
+	lenExp := initStackCap + 1
+	capExp := initStackCap + initStackCap>>1
 	capExp = capExp + capExp>>1
 
 	s := &ArrayStack{make([]interface{}, capExp), 0}
@@ -53,13 +53,13 @@ func TestArrayStackCompact(t *testing.T) {
 		s.size++
 	}
 
-	// test if initial length of underlying array was not changed
+	// test if initial capacity of underlying array was not changed
 
 	testArrayStackAttributes(t, "Initial stack", s, lenExp, capExp)
 
 	// test how copaction works
 
-	capExp = initCap + initCap>>1
+	capExp = initStackCap + initStackCap>>1
 	s.compactStack()
 	testArrayStackAttributes(t, "Compact stack", s, lenExp, capExp)
 
@@ -80,12 +80,12 @@ func TestArrayStackPush(t *testing.T) {
 
 	// test empty stack attributes
 
-	testArrayStackAttributes(t, "Empty stack", s, 0, initCap)
+	testArrayStackAttributes(t, "Empty stack", s, 0, initStackCap)
 
 	// test how push works
 
-	lenExp := initCap + 1
-	capExp := initCap + initCap>>1
+	lenExp := initStackCap + 1
+	capExp := initStackCap + initStackCap>>1
 
 	for i := 1; i <= lenExp; i++ {
 		s.Push(i)
@@ -106,12 +106,12 @@ func TestArrayStackPeek(t *testing.T) {
 
 	i, ok := s.Peek()
 	testArrayStackResult(t, "Peek item from empty stack", i, nil, ok, false)
-	testArrayStackAttributes(t, "Peek item from empty stack", s, 0, initCap)
+	testArrayStackAttributes(t, "Peek item from empty stack", s, 0, initStackCap)
 
 	// init stack
 
-	lenExp := initCap + 1
-	capExp := initCap + initCap>>1
+	lenExp := initStackCap + 1
+	capExp := initStackCap + initStackCap>>1
 
 	for i := 1; i <= lenExp; i++ {
 		s.Push(i)
@@ -132,14 +132,14 @@ func TestArrayStackPop(t *testing.T) {
 
 	// init stack
 
-	lenExp := initCap
-	capExp := initCap
+	lenExp := initStackCap
+	capExp := initStackCap
 
 	for i := 1; i <= lenExp; i++ {
 		s.Push(i)
 	}
 
-	// test how peek works with non-empty stack
+	// test how pop works with non-empty stack
 
 	for i := lenExp; i > 0; i-- {
 		v, ok := s.Pop()
@@ -169,7 +169,7 @@ func TestArrayStackSize(t *testing.T) {
 
 	// init stack
 
-	lenExp := initCap
+	lenExp := initStackCap
 
 	for i := 1; i <= lenExp; i++ {
 		s.Push(i)
@@ -204,14 +204,6 @@ func testArrayStackAttributes(t *testing.T, m string, s *ArrayStack, sizeExp, ca
 	capAct := cap(s.values)
 	if capAct != capExp {
 		t.Fatalf("%s: incorrect capacity of the stack underlying array, expected %v but was %v", m, capExp, capAct)
-	}
-
-	// test stack underlying array values
-
-	for _, v := range s.values[s.size:] {
-		if v != nil {
-			t.Fatalf("%s: incorrect value of unused cell in the stack underlying array, expected %v but was %v", m, nil, v)
-		}
 	}
 
 }

@@ -1,7 +1,7 @@
 package collection
 
 // Stack initial capacity
-const initCap = 10
+const initStackCap = 10
 
 // Array stack type
 type ArrayStack struct {
@@ -11,7 +11,7 @@ type ArrayStack struct {
 
 // Creates a new array stack instance and returns a pointer to it.
 func NewArrayStack() *ArrayStack {
-	return &ArrayStack{make([]interface{}, initCap), 0}
+	return &ArrayStack{make([]interface{}, initStackCap), 0}
 }
 
 // Adds a new item at the top of the stack.
@@ -47,13 +47,15 @@ func (s *ArrayStack) Pop() (i interface{}, ok bool) {
 
 		s.size--
 		i = s.values[s.size]
-		s.values[s.size] = nil
+
 		s.compactStack()
 		ok = true
 
 	} else {
+
 		i = nil
 		ok = false
+
 	}
 
 	return
@@ -82,11 +84,11 @@ func (s *ArrayStack) extendStack(c int) {
 // Decreases stack capacity if it's too large.
 func (s *ArrayStack) compactStack() {
 
-	if l := len(s.values); l > initCap {
+	if l := len(s.values); l > initStackCap {
 
 		c := l - l/3
-		if c < initCap {
-			c = initCap
+		if c < initStackCap {
+			c = initStackCap
 		}
 
 		if c >= s.size {
