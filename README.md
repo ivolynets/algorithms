@@ -1,12 +1,16 @@
 # Algorithms
-Classic algorithms implementations
+Classic algorithms implementations.
 
-*Data types:*
+Currently following algorithms are implemented.
+
+**Data types:**
 
 * Stack (array stack and linked list stack implementations)
 * Queue (array implementation)
 
-*Sorting:*
+_TBD: other data types_
+
+**Sorting:**
 
 * Selection sort
 * Insertion sort
@@ -15,15 +19,17 @@ Classic algorithms implementations
 
 _TBD: merge sort and quick sort algorithms._
 
-*Search:*
+**Search:**
 
 * Binary search
 
-*Evaluation:*
+**Evaluation:**
 
 * Conversion of the mathematical expression from infix to postfix notation (Shunting-yard algorithm by Edsger W. Dijkstra)
 * Evaluation of the mathematical expression in postfix notation (Reverse Polish Notation algorithm by Charles L. Hamblin)
 
-*Graph:*
+**Graph:**
 
 * Finding the shortest path in the graph (algorithm by Edsger W. Dijkstra)
+
+_TBD: other algorithms_
